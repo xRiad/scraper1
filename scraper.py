@@ -569,87 +569,8 @@ if __name__ == "__main__":
     parse_products_for_categories()
     # clear_categories()
     # get_all_categories()
-# --------------------------------------------
-# def is_product_visited(slug):
-#     db = connect_db()
-#     cursor = db.cursor()
-#     cursor.execute("SELECT id FROM visited_products WHERE slug = %s", (slug,))
-#     result = cursor.fetchone()
-#     db.close()
-#     return result is not None
-
-# def mark_product_visited(slug):
-#     db = connect_db()
-#     cursor = db.cursor()
-#     cursor.execute("INSERT IGNORE INTO visited_products (slug) VALUES (%s)", (slug,))
-#     db.commit()
-#     db.close()
-
-# def mark_category_visited(category_id, url):
-#     db = connect_db()
-#     cursor = db.cursor()
-#     cursor.execute("""
-#         INSERT IGNORE INTO visited_categories (category_id, url)
-#         VALUES (%s, %s)
-#     """, (category_id, url))
-#     db.commit()
-#     db.close()
-
-# def is_category_visited(category_id):
-#     db = connect_db()
-#     cursor = db.cursor()
-#     cursor.execute("SELECT id FROM visited_categories WHERE category_id = %s", (category_id,))
-#     result = cursor.fetchone()
-#     db.close()
-#     return result is not None
-
-# def parse_product(url, category_id=None):
-#     driver.get(url)
-#     time.sleep(3)
-
-#     soup = BeautifulSoup(driver.page_source, 'lxml')
-
-#     slug = url.split("/")[-1].split("?")[0]
-#     if is_product_visited(slug):
-#         logging.warning(f"🔁 Уже был: {slug}")
-#         return
-
-#     in_stock = soup.find("div", class_="out-of-stock")
-#     if in_stock:
-#         logging.warning("⛔ Товар не в наличии, пропущен.")
-#         mark_product_visited(slug)
-#         return
-
-#     title = soup.find("h1").text.strip()
-
-#     price_block = soup.find("div", class_="product__info-price")
-#     current_price = price_block.find("div", class_="price-new").text.strip().replace("₼", "").replace(",", "").strip()
-#     old_price_elem = price_block.find("div", class_="price-old")
-#     discount_price = None
-#     discount_percent = 0
-
-#     if old_price_elem:
-#         old_price = old_price_elem.text.strip().replace("₼", "").replace(",", "")
-#         discount_price = float(old_price)
-#         discount_percent = round((discount_price - float(current_price)) / discount_price * 100)
-#     else:
-#         discount_price = float(current_price)
-
-#     current_price = float(current_price)
-
-#     specs_block = soup.find("div", class_="product__desc")
-#     html_description = str(specs_block) if specs_block else ""
-
-#     db = connect_db()
-#     cursor = db.cursor()
-#     cursor.execute("""
-#         INSERT INTO products (title, slug, price, discount_price, discount_percent, in_stock, html_description, category_id)
-#         VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
-#     """, (title, slug, current_price, discount_price, discount_percent, True, html_description, category_id))
-#     product_id = cursor.lastrowid
-
-
 
 # Нет логики захода в категории
 # Нет логики клика "daha cox" для дополнительного рендера карточек продуктов
+
 # Я не должен вставлять ссылку на товар. Должен быть :click на кнопку "Kataloq". После :hover на категорию
